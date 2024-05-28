@@ -87,7 +87,7 @@ console.log(listaTransporte);
 
 const totalMontoTransporte = listaTransporte.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
 
-console.log("El monto total en alimentos es $"+ totalMontoTransporte);
+console.log("El monto total en transporte es $"+ totalMontoTransporte);
 
 // Gasto en impuestos
 
@@ -117,7 +117,7 @@ console.log(listaImpuestos);
 
 const totalMontoImpuestos = listaImpuestos.reduce((acumulado, gasto) => acumulado + gasto.monto, 0);
 
-console.log("El monto total en alimentos es $"+ totalMontoImpuestos);
+console.log("El monto total en impuestos es $"+ totalMontoImpuestos);
 
 
 // Suma de gastos
@@ -139,3 +139,90 @@ if (ingresoMensual < gastoTotal) {
 } else {
     alert("Tenes $" + balance + " a tu favor. Podés ahorrarlo, invertirlo o gastar en lo que quieras");
 }
+
+// Función para buscar y agregar un gasto en la categoría Alimentos
+
+function buscarGastoAlimento(categoria, nombreGasto) {
+    const gastoEncontrado = listaAlimentos.find(gasto => gasto.tipoGasto === nombreGasto);
+    if (gastoEncontrado) {
+        console.log(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+        alert(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+    } else {
+        console.log(`Gasto no encontrado: ${nombreGasto}`);
+        alert(`Gasto no encontrado: ${nombreGasto}`);
+        const agregarNuevo = prompt("¿Deseas agregar este gasto no encontrado? (si/no)");
+        if (agregarNuevo.toLowerCase() === "si") {
+            const nuevoGasto = new GastoAlimentos();
+            nuevoGasto.tipoGasto = nombreGasto;
+            nuevoGasto.nuevoAlimento();
+            listaAlimentos.push(nuevoGasto);
+        }
+    }
+}
+
+
+const alimentoBuscado = prompt("¿Qué gasto deseas buscar dentro de la categoría Alimentos? (leche, azucar, carne, mandarina, etc.)");
+buscarGastoAlimento("alimentos", alimentoBuscado);
+
+
+console.log(listaAlimentos);
+
+console.log("El monto total en alimentos es $"+ totalMontoAlimentos);
+
+// Función para buscar y agregar un gasto en la categoría Trasnporte
+
+function buscarGastoTransporte(categoria, nombreGasto) {
+    const gastoEncontrado = listaTransporte.find(gasto => gasto.tipoGasto === nombreGasto);
+    if (gastoEncontrado) {
+        console.log(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+        alert(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+    } else {
+        console.log(`Gasto no encontrado: ${nombreGasto}`);
+        alert(`Gasto no encontrado: ${nombreGasto}`);
+        const agregarNuevo = prompt("¿Deseas agregar este gasto no encontrado? (si/no)");
+        if (agregarNuevo.toLowerCase() === "si") {
+            const nuevoGasto = new GastoTransprote();
+            nuevoGasto.tipoGasto = nombreGasto;
+            nuevoGasto.nuevoTransporte();
+            listaTransporte.push(nuevoGasto);
+        }
+    }
+}
+
+
+const transporteBuscado = prompt("¿Qué gasto deseas buscar dentro de la categoría Transporte? (subte, tre, nafta, etc.)");
+buscarGastoTransporte("transporte", transporteBuscado);
+
+console.log(listaTransporte);
+
+console.log("El monto total en transporte es $"+ totalMontoTransporte);
+
+
+// Función para buscar y agregar un gasto en la categoría Impuestos
+
+function buscarGastoImpuestos(categoria, nombreGasto) {
+    const gastoEncontrado = listaImpuestos.find(gasto => gasto.tipoGasto === nombreGasto);
+    if (gastoEncontrado) {
+        console.log(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+        alert(`Tu gasto en ${nombreGasto} fue de $${gastoEncontrado.monto}`);
+    } else {
+        console.log(`Gasto no encontrado: ${nombreGasto}`);
+        alert(`Gasto no encontrado: ${nombreGasto}`);
+        const agregarNuevo = prompt("¿Deseas agregar este gasto no encontrado? (si/no)");
+        if (agregarNuevo.toLowerCase() === "si") {
+            const nuevoGasto = new GastoImpuestos();
+            nuevoGasto.tipoGasto = nombreGasto;
+            nuevoGasto.nuevoImpuesto();
+            listaImpuestos.push(nuevoGasto);
+        }
+    }
+}
+
+
+const impuestoBuscado = prompt("¿Qué gasto deseas buscar dentro de la categoría Impuestos? (luz, agua, gas,expensas, etc.)");
+buscarGastoImpuestos("alimentos", impuestoBuscado);
+
+
+console.log(listaImpuestos);
+
+console.log("El monto total en impuestos es $"+ totalMontoImpuestos);
